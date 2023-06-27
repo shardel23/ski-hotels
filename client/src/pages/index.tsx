@@ -124,7 +124,6 @@ export default function Home() {
 
   useEffect(() => {
     function onDataEvent(values: any) {
-      console.log("data incoming");
       // Need to validate values is an array of HotelData
       setResults((curr) => [...curr, ...values]);
     }
@@ -135,8 +134,6 @@ export default function Home() {
       socket.off("data", onDataEvent);
     };
   }, []);
-
-  console.log(results);
 
   return (
     <>
@@ -206,9 +203,9 @@ export default function Home() {
                 <div className="text-xs">{results.length} ski trip options</div>
               </div>
               <ul className="flex flex-col gap-4">
-                {results.map((res) => {
+                {results.map((res, idx) => {
                   return (
-                    <li>
+                    <li key={idx}>
                       <HotelItem
                         hotelData={res}
                         skiSiteName={searchedSkiSiteName}
@@ -253,8 +250,8 @@ const HotelItem = ({
             <div className="flex flex-row">
               {Array.from({
                 length: Number.parseInt(hotelData.HotelInfo.Rating),
-              }).map((_) => (
-                <AiFillStar size={12} />
+              }).map((_, idx) => (
+                <AiFillStar key={idx} size={12} />
               ))}
             </div>
             <span className="text-xs">{skiSiteName}</span>
