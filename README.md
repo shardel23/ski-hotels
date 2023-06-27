@@ -15,3 +15,7 @@ cd ./client
 npm install
 
 npm run dev
+
+## Link for accessing the app
+
+http://localhost:3000
